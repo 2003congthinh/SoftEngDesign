@@ -8,9 +8,8 @@ using namespace std;
 int min(int x, int num[]){
     int min_num = num[0];
     for(int i = 0; i < x; i++){
-        for(int j = 0; j < x;j++){
-            int test_num = (num[i] < num[j]) ? num[i] : num[j];
-            min_num = (test_num < min_num) ? test_num : min_num;
+        if(num[i] < min_num){
+            min_num = num[i];
         }
     }
     return min_num;
@@ -58,9 +57,9 @@ void strToChar(string str){
 
 int main(){
     // Exp1
-    // int size = 15;
-    // int num[size] = {18,3,9,52,60,32,5,1,7,71,2,23,15,67};
-    // cout << min(size, num);
+    int size = 14;
+    int num[size] = {18,3,9,52,60,32,5,4,7,71,2,23,15,67};
+    cout << min(size, num);
 
     // Exp2
     // string a;
@@ -77,27 +76,27 @@ int main(){
     
     // b)
     //Precision
-    cout << 3.14159 << " " << 12.3456 << " (DATA TO DISPLAY)\n";
-    cout << "precision = 3: \n";
-    cout << std::setprecision(3)
-    << 3.14159 << " " << 12.3456 << "\n\n";
-    /* Note: setprecision(n) applies to the entire number,
-    must use the fixed-point format to apply to the fractional part only*/
-    cout << "precision = 3, fixed: \n";
-    cout << std::fixed << std::setprecision(3)
-    << 3.14159 << " " << 12.3456 << "\n\n\n";
-    //Width
-    cout << 10 << " " << 20 << " (DATA TO DISPLAY)\n";
-    cout << "width = 10: \n";
-    cout << std::setw(10)
-    << 10 << " " << 20 << "\n\n";
-    //Fill & Width
-    cout << "fill = 'x', width = 10: \n";
-    cout.fill('x');
-    cout.width(10);
-    cout << 10 << " " << 20 << "\n\n";
-    //Set Format Flags
-    cout << "set flags left justification and showpos, width = 10: \n";
-    cout << std::left << std::showpos << std::setw(10)
-    << 10 << " " << 20 << "\n\n";
+    // cout << 3.14159 << " " << 12.3456 << " (DATA TO DISPLAY)\n";
+    // cout << "precision = 3: \n";
+    // cout << std::setprecision(3)
+    // << 3.14159 << " " << 12.3456 << "\n\n";
+    // /* Note: setprecision(n) applies to the entire number,
+    // must use the fixed-point format to apply to the fractional part only*/
+    // cout << "precision = 3, fixed: \n";
+    // cout << std::fixed << std::setprecision(3)
+    // << 3.14159 << " " << 12.3456 << "\n\n\n";
+    // //Width
+    // cout << 10 << " " << 20 << " (DATA TO DISPLAY)\n";
+    // cout << "width = 10: \n";
+    // cout << std::setw(10)
+    // << 10 << " " << 20 << "\n\n";
+    // //Fill & Width
+    // cout << "fill = 'x', width = 10: \n";
+    // cout.fill('x');
+    // cout.width(10);
+    // cout << 10 << " " << 20 << "\n\n";
+    // //Set Format Flags
+    // cout << "set flags left justification and showpos, width = 10: \n";
+    // cout << std::left << std::showpos << std::setw(10)
+    // << 10 << " " << 20 << "\n\n";
 }
