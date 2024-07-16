@@ -27,10 +27,38 @@ public:
     string getPwd(){return password;}
 
     void changePwd(){
-        string newPwd;
-        cout << "Enter new password: ";
-        cin >> newPwd;
-        password = newPwd;
+        string filename = name + ".dat";
+        ifstream infile(filename);
+
+        if (!infile) {
+            // If no existing password file, allow setting a new password
+            cout << "No existing password. Enter new password: ";
+            cin >> password;
+            ofstream outfile(filename);
+            outfile << password;
+            outfile.close();
+            cout << "Password set successfully." << endl;
+        } else {
+            // If there is an existing password, check the old password first
+            string existingPassword;
+            infile >> existingPassword;
+            infile.close();
+
+            string oldPassword;
+            cout << "Enter existing password: ";
+            cin >> oldPassword;
+
+            if (oldPassword == existingPassword) {
+                cout << "Enter new password: ";
+                cin >> password;
+                ofstream outfile(filename);
+                outfile << password;
+                outfile.close();
+                cout << "Password changed successfully." << endl;
+            } else {
+                cout << "Incorrect password. Password not changed." << endl;
+            }
+        }
     }
 };
 
@@ -80,9 +108,9 @@ int main(){
     
     // Exp 2
     // // b)
-    // Student stu1(10,"Thinh");
-    // Student stu2(9,"Thomas");
-    // Student stu3(15,"James");
+    Student stu1(10,"Thinh");
+    Student stu2(9,"Thomas");
+    Student stu3(15,"James");
     // stu1.showInfo();
     // stu2.showInfo();
     // // c)
@@ -99,5 +127,12 @@ int main(){
     // stu.showInfo();
 
     // Exp 3
+    cout << "Testing password change for student: " << stu1.name << endl;
+    stu1.changePwd();
+
+    // Exp 4
+    
+
+    return 0;
 }
 
