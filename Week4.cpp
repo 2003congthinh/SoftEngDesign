@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <cmath>
+#include <string.h>
 using namespace std;
 
 // Exp1
@@ -105,6 +106,22 @@ public:
     }
 };
 
+// Exp3
+void reverse(string &str){
+    int l = str.length();
+
+    // Char array
+    // char temp[str.length()+1];
+    // strcpy (temp, str.c_str()); // string to char
+    // //cout << temp[1];
+    // char *p = temp;
+    // cout << *(p + l -3);
+
+    // C++ string
+    for(int i = l-1; i>=0; i--){
+        cout << str[i] << "";
+    }
+}
 
 int main(int argc, char *argv[]){
     // Exp1
@@ -166,6 +183,13 @@ int main(int argc, char *argv[]){
 
     // Exp3
     // a)
+    string str1;
+    string str2;
+    cout << "enter 2 strings: ";
+    cin >> str1 >> str2;
+    // cout << str1 << str2;
+    reverse(str1);
+    
 
     return 0;
 }
