@@ -65,10 +65,10 @@ public:
         }
     }
 
-    Student operator >> (){
-        inputData();
-        return *this;
-    }
+    // Student operator >> (){
+    //     inputData();
+    //     return *this;
+    // }
 };
 
 int main(int argc, char *argv[]){
