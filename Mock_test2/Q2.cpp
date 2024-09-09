@@ -5,80 +5,59 @@
 #include <string.h>
 using namespace std;
 
-class Broker {
-public:
-    string name;
-    int buyPrice;
-    Broker *nextBuyer = nullptr;
+class Broker{
+    public:
+        string name;
+        int buyPrice;
+        Broker *nextBuyer = nullptr;
 
-    Broker(string name = "", int price = 0){
-        this->name = name;
-        this->buyPrice = price;
-    }
+        Broker(string name = "", int price = 0){
+            this->name = name;
+            this->buyPrice = price;
+        }
 
-    void showInfo(){
-        cout << name << ": bought the house for $" << buyPrice << "\n";
-    }
+        void showInfo(){
+            cout << name << ": bought the house for $" << buyPrice << "\n";
+        }
 };
 
-void printOut(Broker *firstBroker){
-    firstBroker->showInfo();
-    /* Loop through the linked list */
-    Broker *temp = firstBroker;  //start with first node (head)
-    int count = 1;
-    while (temp != nullptr){
-        if(count == 5){
-            break;
-        }
-        cout << temp->name << " --> ";
-        temp = temp->nextBuyer; //access next node
-        cout << temp->name << " : price = $" << temp->buyPrice << "\n";
-        count ++;
+void printOut(Broker *firstBuyer){
+    Broker *temp = firstBuyer;
+    temp->showInfo();
+    for(int i = 0; i < 4; i++){
+        cout << temp->name << " --> " << temp->nextBuyer->name << " : price = $" << temp->nextBuyer->buyPrice << "\n";
+        temp = temp->nextBuyer;
     }
 }
 
-void lowestProfit(Broker *firstBroker){
-    int bPrice;
-    int sPrice;
-    int profit = firstBroker->nextBuyer->buyPrice - firstBroker->buyPrice;
-    /* Loop through the linked list */
-    Broker *temp = firstBroker;  //start with first node (head)
-    int count = 1;
-    while (temp != nullptr){
-        if(count == 5){
-            break;
+void lowestProfit(Broker *firstBuyer){
+    Broker *temp = firstBuyer;                                    // need this line cuz line 37 already change temp
+    cout << "Broker with lowest income is: ";
+    string name = "David";
+    int firstProf = firstBuyer->nextBuyer->buyPrice - firstBuyer->buyPrice;
+    for(int i = 0; i < 4; i++){
+        int tempProf = temp->nextBuyer->buyPrice - temp->buyPrice;
+        if(tempProf < firstProf){
+            firstProf = tempProf;
+            name = temp->name;
         }
-        int tempProf;
-        bPrice = temp->buyPrice;
-        temp = temp->nextBuyer; //access next node
-        sPrice = temp->buyPrice;
-        tempProf = sPrice - bPrice;
-        if(tempProf < profit){
-            profit = tempProf;
-        }
-        count ++;
+        temp = temp->nextBuyer;
     }
-    cout << profit;
+    cout << name << " with profit of: $" << firstProf;
 }
 
 int main(){
-    /* Initialize nodes */
     Broker b1("David", 800), b2("John", 1000), b3("Peter", 1100), b4("Luna", 1800), b5("Sophia", 3500);
-
-    /* Save reference of first node in head */
-    Broker *firstBroker = &b1;
-
-    /* Connect nodes */
+    Broker *firstBuyer = &b1;
     b1.nextBuyer = &b2;
     b2.nextBuyer = &b3;
     b3.nextBuyer = &b4;
     b4.nextBuyer = &b5;
+    b5.nextBuyer = nullptr;
 
-    // a)
-    printOut(firstBroker);
+    printOut(firstBuyer);
 
-    // b)
-    lowestProfit(firstBroker);
+    lowestProfit(firstBuyer);
 
     return 0;
 }

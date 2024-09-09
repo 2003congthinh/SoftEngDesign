@@ -6,46 +6,64 @@
 using namespace std;
 
 class Employee {
-public:
-    string name;
-    double salary;
+    private:
+        string name;
+        double salary;
+    public:
+        Employee(string name = "", double salary = 0.0){
+            this->name = name;
+            this->salary = salary;
+        }
 
-    Employee(string name = "", double sal = 0.0){
-        this->name = name;
-        this->salary = sal;
-    }
+        void showInfo(){
+            cout << "Name: " << name << "\n" << "Salary: " << salary << "\n";
+        }
 
-    void showInfo(){
-        cout << name << ": " << salary << " ";
-    }
+        friend class Manager;
 };
 
 class Manager : public Employee {
-public:
-    double allowance;
+    private:
+        double allowance;
+    public:
+        Manager(string name = "", double sal = 0.0, double allow = 0.0)
+        : Employee(name, sal) {
+            this->allowance = allow;
+        }
 
-    Manager(string name = "", double sal = 0.0, double allow = 0.0)
-        : Employee(name, sal){
-        this->allowance = allow;
-    }
+        void showInfo(){
+            cout << "Name: " << Employee::name << "\n" << "Salary: " << Employee::salary << "\n" << "Allowance: " << allowance << "\n";
+        }
 
-    void showInfo(){
-        Employee::showInfo();
-        cout << allowance << "\n";
-    }
+        double totalIncome(){
+            double total = 0.0;
+            total = Employee::salary + allowance;
+            return total;
+        }
 };
 
 int main(){
-    Manager man1("John", 1000, 50), man2("Jim", 2000, 100), man3("Jake", 4000, 200), man4("Jack", 8000, 400), man5("Jaqui", 16000, 800);
-    man1.showInfo();
+    Employee e("JK",300);
+    e.showInfo();
 
-    Manager man[] = {man1, man2, man3, man4, man5};
+    Manager m("JK",300,50);
+    m.showInfo();
 
-    int total;
+    Manager *man = new Manager[5]{
+        {"Jack",500,50},
+        {"Jake",400,40},
+        {"Jaquin",300,30},
+        {"Jill",200,20},
+        {"John",100,10}
+    };
+
+    double total = 0;
     for(int i = 0; i < 5; i++){
-        total += man[i].salary;
+        total += man[i].totalIncome();
     }
-    cout << "The avg sal is: " << total/5;
+    cout << "Avg income is: " << total/5 << "\n";
+
+    delete[] man;
 
     return 0;
 }
